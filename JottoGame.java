@@ -28,17 +28,35 @@ public class JottoGame {
    @param humanGuesser is true if you want a human guesser and false for automated mode
   */
   public JottoGame (boolean humanMegaMind, boolean humanGuesser) {
-    
+    this.guesser = new Guesser(humanGuesser);
+    this.megaMind = new MegaMind(humanMegaMind);
   }
   
   /**
    Plays a full game of JOTTO
   */
   public void play () {
+    // choose a word
+    megaMind.chooseWord(hiddenWords);
+    // while the game is not over, make a guess and get a hint
+    while (!gameOver()) {
+      Round r = guesser.makeGuess(board);
+      int hint = megaMind.getHint(r.getGuess());
+      r.setHint(hint);
+      board.add(r);
+      // print the board
+      System.out.println(board);
+    }
+    // Say the game is over
+    System.out.println("Game Over!");
   }
 
   public boolean gameOver () {
-    return false;
+    // find the last guess hint
+    // if the hint is 5, then the game is over
+    int lastHint = board.get(board.size()-1).getHint();
+    return lastHint == 5;
+
   }
   
   /**
