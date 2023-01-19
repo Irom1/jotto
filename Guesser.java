@@ -17,9 +17,10 @@ public class Guesser {
 
   // make a guess
   public Round makeGuess (ArrayList<Round> board, Dictionary allWords) {
+    System.out.println("\n");
     Round r = new Round();
-    String guess = "";
-    while(!isValidGuess(guess, board, allWords, isHuman)) {
+    String guess = null;
+    while(guess == null || !isValidGuess(guess, board, allWords, isHuman)) {
       // new guess
       if(this.isHuman) {
         guess = makeHumanGuess();
@@ -27,7 +28,7 @@ public class Guesser {
         guess = makeAIGuess(allWords);
       }
     }
-    System.out.println("Your guess is: " + guess);
+    System.out.println("Guesser picks word: " + guess);
     r.setGuess(guess);
     return r;
   }
@@ -35,6 +36,7 @@ public class Guesser {
   private String makeHumanGuess () {
     System.out.print("Enter your guess: ");
     String guess = input.nextLine();
+    guess = guess.toLowerCase();
     return guess;
   }
 

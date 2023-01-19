@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class MegaMind {
   private String hiddenWord;
   private boolean isHuman;
+  Scanner input;
 
   public MegaMind(Dictionary d) {
     isHuman = false;
@@ -15,18 +16,23 @@ public class MegaMind {
   }
 
   /**
-   Sets the hiddenword to a selected word from the Dictionary d
-   @param d is the Dictionary to pick the hidden word from
-  */
-  public void chooseWord (Dictionary d) {
+   * Sets the hiddenword to a selected word from the Dictionary d
+   * 
+   * @param d is the Dictionary to pick the hidden word from
+   */
+  public void chooseWord(Dictionary d) {
     if(isHuman) {
-      System.out.println("Please enter a word for the Guesser to guess");
-      Scanner in = new Scanner(System.in);
-      while(!d.contains(hiddenWord)) {
-        hiddenWord = in.nextLine();
+      System.out.println("\nPlease enter a word for the Guesser to guess, hit enter to manually score each guess");
+    }
+    if (isHuman) {
+      input = new Scanner(System.in);
+      while (hiddenWord == null ||
+          !(hiddenWord.equals("") ||
+              d.contains(hiddenWord))) {
+        System.out.print("Secret word: ");
+        hiddenWord = input.nextLine();
         hiddenWord = hiddenWord.toLowerCase();
       }
-      in.close();
     } else {
       hiddenWord = d.getRandomWord();
     }
@@ -41,9 +47,14 @@ public class MegaMind {
   public int getHint(String guess) {
     // return the number of letters in common between guess and hiddenWord
     int hint = 0;
-    for(int i = 0; i < guess.length(); i++) {
-      char c = guess.charAt(i);
-      if(hiddenWord.indexOf(c) != -1) hint++;
+    if (hiddenWord.equals("")) {
+      System.out.print("Enter the hint for " + guess + ": ");
+      hint = input.nextInt();
+    } else {
+      for (int i = 0; i < guess.length(); i++) {
+        char c = guess.charAt(i);
+        if (hiddenWord.indexOf(c) != -1) hint++;
+      }
     }
     return hint;
   }

@@ -33,7 +33,11 @@ public class JottoGame {
   public JottoGame (boolean humanMegaMind, boolean humanGuesser) {
     setup();
     this.guesser = new Guesser(humanGuesser);
-    this.megaMind = new MegaMind(hiddenWords, humanMegaMind);
+    if(humanMegaMind) {
+      this.megaMind = new MegaMind(allWords, true);
+    } else {
+      this.megaMind = new MegaMind(hiddenWords, false);
+    }
   }
 
   private void setup() {
@@ -61,7 +65,11 @@ public class JottoGame {
       System.out.println(board);
     }
     // Say the game is over
-    System.out.println("Game Over! The word was " + megaMind.revealWord());
+    System.out.print("\n\nGame Over!");
+    String word = megaMind.revealWord();
+    if(!word.equals("")) {
+      System.out.println(" The word was " + word);
+    }
   }
 
   public boolean gameOver () {
