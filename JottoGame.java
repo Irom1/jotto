@@ -20,6 +20,9 @@ public class JottoGame {
    Sets ALL the instance variables for a game of JOTTO
   */
   public JottoGame () {
+    setup();
+    this.guesser = new Guesser(false);
+    this.megaMind = new MegaMind(hiddenWords, false);
   }
 
   /** CONSTRUCTOR
@@ -28,8 +31,18 @@ public class JottoGame {
    @param humanGuesser is true if you want a human guesser and false for automated mode
   */
   public JottoGame (boolean humanMegaMind, boolean humanGuesser) {
+    setup();
     this.guesser = new Guesser(humanGuesser);
-    this.megaMind = new MegaMind(humanMegaMind);
+    this.megaMind = new MegaMind(hiddenWords, humanMegaMind);
+  }
+
+  private void setup() {
+    // create the dictionary of all words
+    allWords = new Dictionary("allWords.csv");
+    // create the dictionary of hidden words
+    hiddenWords = new Dictionary("commonWords.csv");
+    // create the board
+    board = new ArrayList<Round>();
   }
   
   /**
@@ -40,7 +53,7 @@ public class JottoGame {
     megaMind.chooseWord(hiddenWords);
     // while the game is not over, make a guess and get a hint
     while (!gameOver()) {
-      Round r = guesser.makeGuess(board);
+      Round r = guesser.makeGuess(board, allWords);
       int hint = megaMind.getHint(r.getGuess());
       r.setHint(hint);
       board.add(r);
@@ -48,15 +61,17 @@ public class JottoGame {
       System.out.println(board);
     }
     // Say the game is over
-    System.out.println("Game Over!");
+    System.out.println("Game Over! The word was " + megaMind.revealWord());
   }
 
   public boolean gameOver () {
     // find the last guess hint
     // if the hint is 5, then the game is over
+    if(board.size() == 0) {
+      return false;
+    }
     int lastHint = board.get(board.size()-1).getHint();
     return lastHint == 5;
-
   }
   
   /**
