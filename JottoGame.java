@@ -40,6 +40,8 @@ public class JottoGame {
     }
   }
 
+  /** Sets up the dictionary for game of JOTTO
+   */
   private void setup() {
     // create the dictionary of all words
     allWords = new Dictionary("allWords.csv");
@@ -72,6 +74,10 @@ public class JottoGame {
     }
   }
 
+  /**
+   Returns true if the game is over
+   @return true if the game is over
+  */
   public boolean gameOver () {
     // find the last guess hint
     // if the hint is 5, then the game is over
@@ -81,17 +87,5 @@ public class JottoGame {
     int lastHint = board.get(board.size()-1).getHint();
     return lastHint == 5;
   }
-  
-  /**
-   Returns true if guess is a valid guess given the current state of JOTTO game board and a given dictionary
-   @param guess the Guess to be checked
-   @param board the Board to check the guess against
-   @return true if guess is valid, and false otherwise
-  */
-  
-  public static boolean isValidGuess (String guess, ArrayList<Round> board) {
-    return true;
-  }
-  
 
 }

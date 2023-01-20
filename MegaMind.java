@@ -1,15 +1,36 @@
 import java.util.Scanner;
 
+/**
+ * MegaMind is the class that picks the word and gives hints
+ */
 public class MegaMind {
+  /**
+   * hiddenWord is the word that the MegaMind is trying to guess
+   */
   private String hiddenWord;
+  /**
+   * isHuman is true if the MegaMind is a human
+   */
   private boolean isHuman;
+  /**
+   * input is the scanner for user input
+   */
   Scanner input;
 
+  /**
+   * Constructor for objects of class MegaMind
+   * @param d is the Dictionary to pick the hidden word from
+   */
   public MegaMind(Dictionary d) {
     isHuman = false;
     chooseWord(d);
   }
 
+  /**
+   * Constructor for objects of class MegaMind
+   * @param d is the Dictionary to pick the hidden word from
+   * @param isHuman is true if the MegaMind is a human
+   */
   public MegaMind(Dictionary d, boolean isHuman) {
     this.isHuman = isHuman;
     chooseWord(d);
@@ -17,7 +38,6 @@ public class MegaMind {
 
   /**
    * Sets the hiddenword to a selected word from the Dictionary d
-   * 
    * @param d is the Dictionary to pick the hidden word from
    */
   public void chooseWord(Dictionary d) {
@@ -60,6 +80,11 @@ public class MegaMind {
     return hint;
   }
 
+  /**
+   * Returns the hidden word
+   * 
+   * @return The hidden word
+   */
   public String revealWord() {
     String hiddenWord = this.hiddenWord;
     this.hiddenWord = ""; // reset hidden word so game can't be played after reveal

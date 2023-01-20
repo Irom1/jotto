@@ -1,25 +1,48 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Guesser is the class that guesses the word
+ */
 public class Guesser {
+  /** 
+   * isHuman is true if the guesser is a human
+  */
   boolean isHuman;
+  /** 
+   * input is the scanner for user input
+  */
   Scanner input;
+  /** 
+   * wordIndex is the index of the word in the dictionary
+  */
+  int wordIndex;
 
-  // constructors
+  /**
+   * Constructor for objects of class Guesser
+   */
   public Guesser () {
     isHuman = false;
     input = new Scanner(System.in);
+    wordIndex = 0;
   }
   public Guesser (boolean isHuman) {
     this.isHuman = isHuman;
     input = new Scanner(System.in);
+    wordIndex = 0;
   }
 
-  // make a guess
+  /**
+   * Makes a guess
+   * @param board the board
+   * @param allWords the dictionary
+   * @return the guess
+   */
   public Round makeGuess (ArrayList<Round> board, Dictionary allWords) {
     System.out.println("\n");
     Round r = new Round();
     String guess = null;
+    wordIndex = 0;
     while(guess == null || !isValidGuess(guess, board, allWords, isHuman)) {
       // new guess
       if(this.isHuman) {
@@ -38,6 +61,10 @@ public class Guesser {
     return r;
   }
 
+  /**
+   * Makes a human guess
+   * @return the guess
+   */
   private String makeHumanGuess () {
     System.out.print("Enter your guess (type 'end' to give up): ");
     String guess = input.nextLine();
@@ -45,11 +72,26 @@ public class Guesser {
     return guess;
   }
 
+  /**
+   * Makes an AI guess
+   * @param allWords is the dictionary of all words
+   * @return the guess
+   */
   private String makeAIGuess (Dictionary allWords) {
-    // demo code, return random word from dictionary
-    return allWords.getRandomWord();
+    // demo code, return random word from dictionary, pretty inefficient
+    String word = allWords.getWordAtIndex(wordIndex);
+    wordIndex++;
+    return word;
   }
 
+  /**
+   * Checks if a guess is valid
+   * @param guess is the guess
+   * @param board is the current board
+   * @param allWords is the dictionary of all words
+   * @param isHuman is true if the guesser is human
+   * @return true if the guess is valid
+   */
   public boolean isValidGuess (String guess, ArrayList<Round> board, Dictionary allWords, boolean isHuman) {
     // check if guess is 5 letters
     if(guess.length() != 5) {
