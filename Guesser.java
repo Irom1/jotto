@@ -24,6 +24,11 @@ public class Guesser {
       // new guess
       if(this.isHuman) {
         guess = makeHumanGuess();
+        if(guess.equals("end")) {
+          System.out.println("Guesser gives up, switching to AI");
+          this.isHuman = false;
+          guess = makeAIGuess(allWords);
+        }
       } else {
         guess = makeAIGuess(allWords);
       }
@@ -34,7 +39,7 @@ public class Guesser {
   }
 
   private String makeHumanGuess () {
-    System.out.print("Enter your guess: ");
+    System.out.print("Enter your guess (type 'end' to give up): ");
     String guess = input.nextLine();
     guess = guess.toLowerCase();
     return guess;

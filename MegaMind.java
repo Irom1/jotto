@@ -35,6 +35,7 @@ public class MegaMind {
       }
     } else {
       hiddenWord = d.getRandomWord();
+      System.out.println("AI picked a secret word. Try to guess it!");
     }
   }
 
