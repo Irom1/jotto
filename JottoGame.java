@@ -56,7 +56,7 @@ public class JottoGame {
   */
   public void play () {
     // choose a word
-    megaMind.chooseWord(hiddenWords);
+    //megaMind.chooseWord(hiddenWords);
     // while the game is not over, make a guess and get a hint
     while (!gameOver()) {
       Round r = guesser.makeGuess(board, allWords);
