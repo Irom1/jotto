@@ -6,7 +6,7 @@ Bells & Whistles:
 - When Human MegaMind chooses word they can either input the hiddenWord and have hints automatically scored -OR- provide the hints for each guess
 - Human guesser can "give up" mid game and switch to AI
 - When a game ends, it asks you if you want to play again
-- 
+- Resets the screen after each game
 
 */
 

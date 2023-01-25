@@ -11,6 +11,9 @@ class Main {
     // while the user wants to play, play a game
     boolean playAgain = true;
     while (playAgain) {
+      // clear the screen
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
       // play a game
       playGame(s);
       // ask if the user wants to play again
@@ -22,7 +25,7 @@ class Main {
     System.out.println("Goodbye!");
   }
 
-  // play a game
+  // play a game and let the user choose if they want to play against a human
   public static void playGame(Scanner s) {
     // ask if the user wants to play against a human
     System.out.print("Have AI pick the word? (y/n): ");
