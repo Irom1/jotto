@@ -78,9 +78,10 @@ public class Guesser {
    * @return the guess
    */
   private String makeAIGuess (Dictionary allWords) {
-    // demo code, return random word from dictionary, pretty inefficient
-    String word = allWords.getWordAtIndex(wordIndex);
-    wordIndex++;
+    // return random word from dictionary, pretty inefficient
+    String word = allWords.getRandomWord();
+    //String word = allWords.getWordAtIndex(wordIndex);
+    //wordIndex++;
     return word;
   }
 
